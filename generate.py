@@ -32,7 +32,7 @@ img.load()
 width,height=img.size
 
 # Convert input image to numpy array
-imgdata=np.asarray(img,dtype="int32")/255
+imgdata=np.asarray(img,dtype="int32").transpose(1,0)/255
 
 
 # Load/Create the base pattern
@@ -51,13 +51,16 @@ else:
     # If no pattern path was provided, then generate random noise as the pattern
     pattern=rng.random((random_pattern_width,height,3))*255
 
+
 # Generate the output image data left-to-right
-data=np.zeros((width,height,3))
+
+# Initalize the output image data to be the same size as the input image, while having the same number of channels as the pattern image.
+data=np.zeros((width,height,pattern.shape[2]))
 for x in range(width):
     # Calculate the position which the other eye should be guided to in order to match the depth
     # - Invert the depth using (1 - pixel value) so that 0 is close and 1 is far.
     # - Subtract the inverted_depth*depth_scale*pattern_width from the current x value to get the position where the other eye should be looking.
-    other_eye_pos=(x-(1 - imgdata[:,x]*depth_scale)*pattern.shape[0]).astype("int32")
+    other_eye_pos=(x-(1 - imgdata[x,:]*depth_scale)*pattern.shape[0]).astype("int32")
 
      # Set the current pixel to be the same as the pixel which the other eye is looking at.
      # Set it to the pattern if it is refering to a point off the image<0. This essentially seeds the image with the pattern outside of view on the left; the pattern may get distorted as the image is constructed from left-to-right.
