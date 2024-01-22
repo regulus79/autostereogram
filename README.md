@@ -17,4 +17,4 @@ A python script for easily generating autostereograms from depth images.
 <br>
 **Output:**
 <br>
-<img alt="output autostereograph using the given pattern and depth map" src="https://github.com/regulus79/autostereogram/blob/main/sample_outputs/chain_ring_output_grass_and_sky.png?raw=true" height=300>
+<img alt="output autostereograph using the given pattern and depth map" src="https://github.com/regulus79/autostereogram/blob/main/sample_outputs/chain_ring_output_grass_and_sky.png?raw=true" height=500>
