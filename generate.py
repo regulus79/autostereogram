@@ -2,13 +2,25 @@ import numpy as np
 from matplotlib import pyplot as plt
 from PIL import Image
 import math
-import sys
+import argparse
 
-assert len(sys.argv)>2, "Please put provide both an input and output path.\nUsage: python generate.py <path to input image/video> <path to output image/video> [<path to pattern image/video>]"
+parser = argparse.ArgumentParser(
+    prog="python generate.py",
+    description="Generate Autostereograms from depthmaps"
+)
 
-input_path=sys.argv[1]
-output_path=sys.argv[2]
-pattern_path=sys.argv[3] if len(sys.argv)>3 else None
+parser.add_argument("input_path",type=str,help="Path to the input depth image.")
+parser.add_argument("output_path",type=str,help="Path to where the script should save the autostereogram.")
+parser.add_argument("pattern_path",type=str,help="Optional path to the pattern image which the script should use.",nargs="?")
+parser.add_argument("--depth-scale",type=float,help="Set the depth scale of the autostereogram (higher value means the shape pops out of the page more) Default: 0.2",nargs="?",default=0.2)
+parser.add_argument("--random-pattern-width",type=int,help="Set the width of the random pattern in pixels. Only used when no pattern image is given. Default: image_width//10",nargs="?")
+
+args=parser.parse_args()
+
+input_path=args.input_path
+output_path=args.output_path
+pattern_path=args.pattern_path
+depth_scale=args.depth_scale
 
 rng=np.random.default_rng()
 
@@ -26,7 +38,7 @@ imgdata=np.asarray(img,dtype="int32")/255
 # Load/Create the base pattern
 
 pattern=None
-random_pattern_width=width//10 # Default value for random-dot autostereography
+random_pattern_width=args.random_pattern_width or width//10 # Default value for random-dot autostereography
 
 # If a path was given for the pattern image, then load it as the base pattern
 if pattern_path:
@@ -41,7 +53,7 @@ else:
 
 # Helper functions
 def depth(x,y):
-    return 1 - imgdata[y,x]*0.2
+    return 1 - imgdata[y,x]*depth_scale
 
 def get_pattern_at_point(x,y):
     return pattern[round(x)%pattern.shape[0],y%pattern.shape[1],:]
