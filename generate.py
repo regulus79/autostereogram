@@ -49,7 +49,7 @@ if pattern_path:
     pattern=pattern.transpose(1,0,2)
 else:
     # If no pattern path was provided, then generate random noise as the pattern
-    pattern=rng.random((random_pattern_width,height))
+    pattern=rng.random((random_pattern_width,height,3))*255
 
 # Generate the output image data left-to-right
 data=np.zeros((width,height,3))
