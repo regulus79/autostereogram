@@ -3,10 +3,10 @@ A python script for easily generating autostereograms from depth images.
 
 # Usage
 
-`python generate.py <path/to/input> <path/to/output> [<optional/path/to/pattern>] [--depth-scale=<float>] [--random-pattern-width=<int>]`
+`python generate.py <path/to/input> <path/to/output> [<optional/path/to/pattern>] [--depth-scale=<float>, default: 0.2] [--random-pattern-width=<int>, default: 1/10th of image width]`
 
-The first argument is a path to the input image. Videos as inputs are not yet supported.
-The second agument is a path to where the script should save the generated autostereogram.
-The third argument is an optional path to the pattern image. If this is left blank, a random noise pattern will be used instead.
+# Examples
 
-There are also optional arguments for setting the depth scale and the width of the randomly generated pattern (if no pattern image is given).
+![depth map of the default Blender monkey 3d model](https://github.com/regulus79/autostereogram/blob/main/sample_images/monkey.png)
+![sample pattern of sky and grass](https://github.com/regulus79/autostereogram/blob/main/sample_patterns/grass_and_sky.png?raw=true)
+![output autostereograph using the given pattern and depth map](https://github.com/regulus79/autostereogram/blob/main/sample_outputs/monkey_output_grass_and_sky.png?raw=true)
