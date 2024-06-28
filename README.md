@@ -21,7 +21,7 @@ A python script for easily generating autostereograms from depth images.
 
 # How it works
 
-Similarly to how the [wikipeadia article](https://en.wikipedia.org/wiki/Autostereogram) on the topic describes it, the autostereogram is created from left to right from a repeating pattern. Since the pattern repeats, people can relax their eyes and have them look at two different sections while tricking their brain to think it is one. This works for a flat surface, but more must be done to give the image depth.
+Similarly to how the [Wikipedia article](https://en.wikipedia.org/wiki/Autostereogram) on the topic describes it, the autostereogram is created from left to right from a repeating pattern. Since the pattern repeats, people can relax their eyes and have them look at two different sections while tricking their brain to think it is one. This works for a flat surface, but more must be done to give the image depth.
 
 To give depth to the autostereogram, one must first realize that the brain will think that an object is closer if the left eye sees it a little to the right and the right eye sees it a little to the left. In other words, the width of the repeating pattern must be less for that object so that the eyes must cross at a closer point in order to see it.
 
